@@ -17,4 +17,6 @@ public class JsonPlaceHolderBaseUrl {
         spec = new RequestSpecBuilder().setBaseUri(baseUrl).setContentType(ContentType.JSON).build();
     }
 
+
+     // RequestSpecification spec = new RequestSpecBuilder();
 }

@@ -46,9 +46,9 @@ public class Get03 {
         response.then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)          // ContentType.JSON ==> “application/json”
-                .body("title", equalTo("121213et itaque necessitatibus maxime molestiae qui quas velit"))
+                .body("title", equalTo("et itaque necessitatibus maxime molestiae qui quas velit"))
                 .body("completed", equalTo(false))
-                .body("userId", equalTo(3));
+                .body("userId", equalTo(2));
 
 
         //2nd way: Soft Assertion
@@ -58,7 +58,7 @@ public class Get03 {
                 .statusCode(200)
                 .contentType(ContentType.JSON)          // ContentType.JSON ==> “application/json”
                 .body("title", equalTo("54874et itaque necessitatibus maxime molestiae qui quas velit"),
-                        "completed", equalTo(false), "userId", equalTo(3));
+                        "completed", equalTo(true), "userId", equalTo(3));
 
         //NOTE:
         // Hard Assertion stops the code/system straightaway as soon as it encounters any error
