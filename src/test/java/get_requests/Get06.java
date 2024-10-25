@@ -2,18 +2,20 @@ package get_requests;
 
 import base_urls.HerokuAppBaseUrl;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 
 public class Get06 extends HerokuAppBaseUrl {
 
     /*
      Given
-            https://restful-booker.herokuapp.com/booking/10
+            https://restful-booker.herokuapp.com/booking/13
         When
             User send a GET request to the URL
         Then
@@ -22,23 +24,23 @@ public class Get06 extends HerokuAppBaseUrl {
             Response content type is “application/json”
         And
             Response body should be like;
-         {
-            "firstname": "Sally",
-            "lastname": "Ericsson",
-            "totalprice": 554,
-            "depositpaid": true,
-            "bookingdates": {
-                "checkin": "2021-07-21",
-                "checkout": "2023-02-04"
-            },
-            "additionalneeds": "Breakfast"
-        }
+                {
+                "firstname": "John",
+                "lastname": "Smith",
+                "totalprice": 111,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2018-01-01",
+                    "checkout": "2019-01-01"
+                },
+                "additionalneeds": "Breakfast"
+            }
      */
 
     @Test
     public void get06(){
         // Set the URL
-        spec.pathParams("p1","booking", "p2", "130");
+        spec.pathParams("p1","booking", "p2", "13");
 
         //Send the request and get the response
         Response response = given(spec).get("{p1}/{p2}");         // syntax for more than one path param => "{}/{}"
@@ -79,11 +81,27 @@ public class Get06 extends HerokuAppBaseUrl {
                 iv) Pojo Class
              */
 
+            //2nd way: Using JsonPath
 
+               //Step 1: Creating the JsonPath object
+                JsonPath jsonPath = response.jsonPath();
 
+               //Step2: Extracting values with JsonPath
+                String firstName = jsonPath.getString("firstname");
+                String lastName = jsonPath.getString("lastname");
+                int totalPrice = jsonPath.getInt("totalprice");
+                boolean depositPaid = jsonPath.getBoolean("depositpaid");
+                String checkinDate = jsonPath.getString("bookingdates.checkin");
+                String checkoutDate = jsonPath.getString("bookingdates.checkout");
+                String additionalNeeds = jsonPath.getString("additionalneeds");
 
+                //Step3: Asserting values with JsonPath
+                assertEquals("John", firstName);   // assertEquals("John", jsonPath.getString("firstname"));
+                assertEquals("Smith", lastName);
+                assertEquals( 111, totalPrice);
+                assertEquals(true, depositPaid);
+                assertEquals("2018-01-01", checkinDate);
+                assertEquals("2019-01-01", checkoutDate);
+                assertEquals("Breakfast", additionalNeeds);
     }
-
-
-
 }
