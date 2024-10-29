@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 
 public class Get07 extends PetstoreBaseUrl {
@@ -62,6 +64,15 @@ public class Get07 extends PetstoreBaseUrl {
 
         //1st way: Soft Assertion (using single body() method)
         // HOMEWORK
+        response.then().body("id", equalTo(1098)
+                ,"category.name",is("Bird")
+                ,"category.id",is(0)
+                ,"name", is("Tweety")
+                ,"photoUrls[0]",is("string")
+                ,"tags[0].name",is("Pets")
+                ,"tags[1].name",is("PrettyPaws")
+                ,"status",is("pending")
+        );
 
         //2nd way: Using JsonPath
             //Step 1: Creating the JsonPath object

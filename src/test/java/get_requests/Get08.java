@@ -35,7 +35,7 @@ public class Get08 extends JsonPlaceHolderBaseUrl {
             spec.pathParam("p1", "todos");
         // Send the request and get the response
             Response response = given(spec).get("{p1}");
-            //response.prettyPrint();
+           // response.prettyPrint();
 
         // Do Assertion
         //1)Status code is 200
@@ -76,15 +76,24 @@ public class Get08 extends JsonPlaceHolderBaseUrl {
 
         //3)Print all userIds whose ids are less than 5 on the console
                     List<Integer> userIdsList = jsonPath.getList("findAll{it.id < 5}.userId");
-                    System.out.println("userIdsList = " + userIdsList);
+                  //  System.out.println("userIdsList = " + userIdsList);
             //Assert that the number of userIds whose ids are less than 5 is 4
             assertEquals(4, userIdsList.size());
-            System.out.println("userIdsList.size(): "+ userIdsList.size());
+          //  System.out.println("userIdsList.size(): "+ userIdsList.size());
 
         // 4)Print all titles whose ids are less than 5
                 List<String> titleList = jsonPath.getList("findAll{it.id < 5}.title");
-                System.out.println("titleList = " + titleList);
+              //  System.out.println("titleList = " + titleList);
             //Assert that "delectus aut autem" is one of the titles whose id is less than 5
             assertTrue(titleList.contains("delectus aut autem"));
         }
+
+
+          /*
+            NOTE: We have multiple ways of extracting the data out of the response body;
+                i) asString() method => changes data type of response to String
+                ii) JsonPath
+                iii) Maps
+                iv) Pojo Class
+             */
 }
