@@ -56,7 +56,6 @@ public class JsonPlaceHolderPojo {
 
     //Step 4: Create toString() Method
 
-
     @Override
     public String toString() {
         return "JsonPlaceHolderPojo{" +

@@ -18,6 +18,7 @@ import static test_data.HerokuAppTestData.herokuAppMapper;
 public class Post04 extends HerokuAppBaseUrl {
 
     /*
+    Given
     1) https://restful-booker.herokuapp.com/booking
    2) {
        "firstname" : "Jim",
