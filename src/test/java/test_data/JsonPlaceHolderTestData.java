@@ -23,4 +23,12 @@ public class JsonPlaceHolderTestData {
     // to update one value of the existing data, we can send null values as well If we use primitive int or boolean
     // we will get NullPointerExcetion for Put or Patch methods
 
+
+    public static String stringBody (Integer userId, String title, Boolean completed){
+        return "{\"userId\": "+userId+ ", \"title\": \""+title+"\" ,\"completed\": " + completed+"}";
+    }
+
+
+
+
 }
