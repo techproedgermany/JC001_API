@@ -2,7 +2,9 @@ package herokuApp_SmokeTest;
 
 import base_urls.HerokuAppBaseUrl;
 import io.restassured.response.Response;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import pojos.BookingDatesPojo;
 import pojos.HerokuAppPojo;
 import pojos.HerokuResponsePojo;
@@ -11,7 +13,9 @@ import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static utils.ObjectMapperUtils.convertJsonToJava;
 
+
 public class C01PostBooking extends HerokuAppBaseUrl {
+    public static int bookingid;
 
     /*
     Given
@@ -50,6 +54,8 @@ public class C01PostBooking extends HerokuAppBaseUrl {
             }
      */
 
+
+
     @Test
     public void co1PostBooking(){
 
@@ -62,7 +68,7 @@ public class C01PostBooking extends HerokuAppBaseUrl {
         Response response = given(spec).when().body(payload).post("{p1}");
         response.prettyPrint();
 
-        //ObjectMapper POJO
+//        //ObjectMapper POJO
         HerokuResponsePojo actualData = convertJsonToJava(response.asString(), HerokuResponsePojo.class);
         System.out.println("actualData = " + actualData);
         assertEquals(200, response.statusCode());
@@ -76,13 +82,18 @@ public class C01PostBooking extends HerokuAppBaseUrl {
         assertEquals(bookingDates.getCheckout(), actualData.getBooking().getBookingdates().getCheckout());
         assertEquals(payload.getAdditionalneeds(), actualData.getBooking().getAdditionalneeds());
 
-        int bookingid = response.jsonPath().getInt("bookingid");
+        bookingid = response.jsonPath().getInt("bookingid");
         System.out.println("bookingid = " + bookingid);
 
-
+//        // Extract bookingid directly
+//        HerokuResponsePojo herokuResponse = response.as(HerokuResponsePojo.class);
+//        bookingid = herokuResponse.getBookingid(); // Set bookingid for use in other classes
+//        System.out.println("Generated booking ID: " + bookingid);
+//
+//        System.out.println("Booking ID after POST request: " + bookingid);
+//        assert bookingid > 0 : "Booking ID was not properly set from POST response";
 
     }
-
 
 
 }

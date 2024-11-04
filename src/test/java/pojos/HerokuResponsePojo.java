@@ -1,30 +1,22 @@
 package pojos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class HerokuResponsePojo {
-
-    //Define fields
-    private Integer bookingid;
+    private int bookingid;
     private HerokuAppPojo booking;
-
-    //Constructors with and without parameters
 
     public HerokuResponsePojo() {
     }
 
-    public HerokuResponsePojo(Integer bookingid, HerokuAppPojo booking) {
+    public HerokuResponsePojo(int bookingid, HerokuAppPojo booking) {
         this.bookingid = bookingid;
         this.booking = booking;
     }
 
-    //Getters and setters
-    public Integer getBookingId() {
+    public int getBookingid() {
         return bookingid;
     }
 
-    public void setBookingId(Integer bookingid) {
+    public void setBookingid(int bookingid) {
         this.bookingid = bookingid;
     }
 
@@ -36,7 +28,6 @@ public class HerokuResponsePojo {
         this.booking = booking;
     }
 
-    //toString()
     @Override
     public String toString() {
         return "HerokuResponsePojo{" +
